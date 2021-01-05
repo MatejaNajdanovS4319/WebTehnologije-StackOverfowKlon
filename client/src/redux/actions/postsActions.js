@@ -26,6 +26,7 @@ export const get15Posts = (numPage) => async (dispatch) => {
     type: LOADING_POSTS_TRUE,
   });
   obj = JSON.stringify(obj);
+  console.log(obj)
   try {
     const res = await axiosHeaders.post('/posts/get15', obj);
     if (res.data.msg) {
@@ -118,7 +119,7 @@ export const deletePost = (postId) => async (dispatch) => {
     dispatch({
       type: LOADING_POSTS_TRUE,
     });
-    const res = await axiosHeaders.delete(`posts/${postId}`, config);
+    await axiosHeaders.delete(`posts/${postId}`, config);
     dispatch({
       type: POST_DELETE,
       payload: postId,
@@ -236,7 +237,7 @@ export const deleteComment = (postId, commentId) => async (dispatch) => {
   dispatch({
     type: LOADING_POSTS_TRUE,
   });
-  const res = await axiosHeaders.delete(`/comments/${postId}/${commentId}`, config);
+  await axiosHeaders.delete(`/comments/${postId}/${commentId}`, config);
   dispatch({
     type: COMMENT_DELETE,
     payload: commentId,

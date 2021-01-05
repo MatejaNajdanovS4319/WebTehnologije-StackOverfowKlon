@@ -46,7 +46,7 @@ const Navbar = ({
       <div className='container navbar-container'>
         <div className='navbar-brand'>
           <Link to='/' className='brand'>
-            DevHelp
+            Stackoverflow clone
           </Link>
         </div>
         {nav}

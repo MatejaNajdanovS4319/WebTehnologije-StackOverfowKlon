@@ -28,7 +28,7 @@ const App = () => {
       <div className='app-body'>
         <BrowserRouter>
           <Navbar />
-          <Alert text={'hi'}/>
+          <Alert />
           <Switch>
             <Route path='/' exact component={IndexPage} />
             <Route path='/posts' exact component={Posts} />

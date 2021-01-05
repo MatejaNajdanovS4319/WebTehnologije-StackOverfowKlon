@@ -38,7 +38,7 @@ router.get('/sent', authMiddleware, async (req, res) => {
 
 // SEND MESSAGE
 // REGISTERED - USER
-// GET http://localhost:5000/messages/sendMessage/:id
+// POST http://localhost:5000/messages/sendMessage/:id
 router.post('/sendMessage/:id', authMiddleware, async (req, res) => {
   const { text } = req.body;
   if (messageTextValidator(text)) {

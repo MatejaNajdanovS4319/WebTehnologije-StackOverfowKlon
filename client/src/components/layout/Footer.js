@@ -5,7 +5,7 @@ const Footer = () => {
   return (
     <div className='footer'>
       <div className="container footer-container d-flex">
-          <Link to="/" className="brand">DevHelp</Link>
+          <Link to="/" className="brand">Stackoverflow clone</Link>
           <p>For bussines, by developers</p>
       </div>
     </div>
