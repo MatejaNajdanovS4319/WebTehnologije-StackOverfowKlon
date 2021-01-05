@@ -118,7 +118,7 @@ export const deletePost = (postId) => async (dispatch) => {
     dispatch({
       type: LOADING_POSTS_TRUE,
     });
-    const res = await axiosHeaders.delete(`posts/${postId}`, config);
+    await axiosHeaders.delete(`posts/${postId}`, config);
     dispatch({
       type: POST_DELETE,
       payload: postId,
@@ -198,7 +198,6 @@ export const likeComment = (postId, commentId) => async (dispatch) => {
       null,
       config
     );
-    console.log(res)
     dispatch({
       type: LIKE_COMMENT,
       payload: res.data,
@@ -236,7 +235,7 @@ export const deleteComment = (postId, commentId) => async (dispatch) => {
   dispatch({
     type: LOADING_POSTS_TRUE,
   });
-  const res = await axiosHeaders.delete(`/comments/${postId}/${commentId}`, config);
+  await axiosHeaders.delete(`/comments/${postId}/${commentId}`, config);
   dispatch({
     type: COMMENT_DELETE,
     payload: commentId,

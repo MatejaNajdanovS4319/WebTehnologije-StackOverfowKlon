@@ -11,9 +11,10 @@ import {
   deleteComment,
 } from '../../redux/actions/postsActions';
 import { loadingProfileTrue } from '../../redux/actions/profileActions';
+import { hideAlert, showAlert } from '../../redux/actions/alertActions';
 
 const Post = ({
-  profile: { profile },
+  profile: { profile, isAuthenticated },
   postId,
   profileIdProp,
   firstName,
@@ -33,18 +34,20 @@ const Post = ({
   likeComment,
   dislikeComment,
   deleteComment,
+  showAlert,
+  hideAlert
 }) => {
   const history = useHistory();
   const onDelClick = () => {
     if (role === 'comment') {
-        deleteComment(postId, commentId);
-      }
-    if (role ==='question') {
-      deletePost(postId)
-      return history.push('/posts')
+      deleteComment(postId, commentId);
+    }
+    if (role === 'question') {
+      deletePost(postId);
+      return history.push('/posts');
     }
     deletePost(postId);
-  }
+  };
   const delButton = () => {
     if (!profile._id) return null;
     return profile._id !== profileIdProp ? null : (
@@ -54,10 +57,22 @@ const Post = ({
     );
   };
   const onLikeClick = () => {
+    if (!isAuthenticated) {
+      showAlert('First login to like!')
+      return setTimeout(() => {
+        hideAlert()
+      },2000)
+    };
     if (role === 'comment') return likeComment(postId, commentId);
     likePost(postId);
   };
   const onDisikeClick = () => {
+    if (!isAuthenticated) {
+      showAlert('First login to dislike!')
+      return setTimeout(() => {
+        hideAlert()
+      },2000)
+    };
     if (role === 'comment') return dislikeComment(postId, commentId);
     dislikePost(postId);
   };
@@ -124,5 +139,7 @@ const mapDispatchToProps = {
   likeComment,
   dislikeComment,
   deleteComment,
+  showAlert,
+  hideAlert
 };
 export default connect(mapStateToProps, mapDispatchToProps)(Post);
