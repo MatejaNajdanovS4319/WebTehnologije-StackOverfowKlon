@@ -26,7 +26,6 @@ export const get15Posts = (numPage) => async (dispatch) => {
     type: LOADING_POSTS_TRUE,
   });
   obj = JSON.stringify(obj);
-  console.log(obj)
   try {
     const res = await axiosHeaders.post('/posts/get15', obj);
     if (res.data.msg) {
@@ -199,7 +198,6 @@ export const likeComment = (postId, commentId) => async (dispatch) => {
       null,
       config
     );
-    console.log(res)
     dispatch({
       type: LIKE_COMMENT,
       payload: res.data,
