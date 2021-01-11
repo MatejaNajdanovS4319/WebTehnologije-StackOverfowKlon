@@ -33,7 +33,7 @@ router.post('/get15', async (req, res) => {
     if (!numPage) {
       const posts = await Post.find()
         .sort({ date: -1 })
-        .limit(10)
+        .limit(15)
         .select('-comments');
       return res.json({ posts });
     }
