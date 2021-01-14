@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { connect } from 'react-redux';
 import { useParams } from 'react-router-dom';
 import { getProfile, sendMessage } from '../redux/actions/profileActions';
+import { hideAlert, showAlert } from '../redux/actions/alertActions'
 import Loader from './layout/Loader';
 import image from '../style/img/placeholder-img.png';
 
@@ -9,6 +10,9 @@ export const Profile = ({
   sendMessage,
   getProfile,
   profile: { profileToView, isAuthenticated, loading },
+  
+  showAlert,
+  hideAlert
 }) => {
   const { id } = useParams();
   useEffect(() => {
@@ -25,6 +29,11 @@ export const Profile = ({
 
   const onFormSubmit = (e) => {
     e.preventDefault();
+    if(!isAuthenticated) {
+      showAlert('Please sign in first!')
+      return setTimeout(()=>{hideAlert()},2000 )
+      
+    }
     sendMessage(id, messageText.text);
     setMessageText({ text: '' });
   };
@@ -66,6 +75,8 @@ const mapStateToProps = (state) => ({
 const mapDispatchToProps = {
   getProfile,
   sendMessage,
+  showAlert,
+  hideAlert,
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(Profile);
